@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.entity.VoterRequest;
 import com.example.demo.exception.VoterDataNotFoundException;
 import com.example.demo.repository.VoterRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class VoterServiceImpl implements VoterService {
     @Autowired
     VoterRepository voterRepository;
@@ -26,6 +28,7 @@ public class VoterServiceImpl implements VoterService {
 
     @Override
     public VoterRequest fetchVoterDtlsById(String voterId) throws VoterDataNotFoundException {
+        log.info("Inside the voter request {}",voterId);
         Optional<VoterRequest> voterRequest = voterRepository.findById(voterId);
         if (voterRequest.isPresent())
             return voterRepository.findById(voterId).get();
